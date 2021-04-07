@@ -9,55 +9,38 @@ var convertDegreeToRate = (degree) => {
     return ((rateDiff / 180) * degree) + minRate
 }
 
-var counter = 0
+var degree = 90
+var addNum = 5
+var minDegree = 60
+var maxDegree = 180
+var intervalTimespan = 20
 raspi.init(() => {
-    var pwm = new PWM('GPIO18');
+    var pwm1 = new PWM('GPIO18');
+    var pwm2 = new PWM('GPIO19');
     setInterval(() => {
-        const rate = convertDegreeToRate(counter % 2 ? 0 : 90)
-        pwm.write(rate);
-        // pwm.write(0.025)
-        counter += 1
-    }, 500)
+        degree += addNum
+        console.info(degree, addNum)
+        if (degree >= maxDegree) {
+            degree = maxDegree
+            addNum = -addNum
+        } 
+        if (degree <= minDegree) {
+            degree = minDegree
+            addNum = -addNum
+        }
+        const rate1 = convertDegreeToRate(degree)
+        pwm1.write(rate1)
+        const rate2 = convertDegreeToRate(degree)
+        pwm2.write(rate2)
+    }, intervalTimespan)
+
+    process.stdin.resume();
+    process.on('SIGINT', function() {
+        const rate1 = convertDegreeToRate(90)
+        pwm1.write(rate1)
+        const rate2 = convertDegreeToRate(90)
+        pwm2.write(rate2)
+        //終了処理…
+        process.exit();
+    });
 });
-
-
-// var rpio = require('rpio');
-
-// var pin = 12;           /* P12/GPIO18 */
-// // var range = 1024;       /* LEDs can quickly hit max brightness, so only use */
-// // var max = 128;          /*   the bottom 8th of a larger scale */
-// var clockdiv = 8;       /* Clock divider (PWM refresh rate), 8 == 2.4MHz */
-// var interval = 5;       /* setInterval timer, speed of pulses */
-// var times = 5;          /* How many times to pulse before exiting */
-
-// /*
-//  * Enable PWM on the chosen pin and set the clock and range.
-//  */
-// rpio.open(pin, rpio.PWM);
-// rpio.pwmSetClockDivider(clockdiv);
-// // rpio.pwmSetRange(pin, range);
-
-// // /*
-// //  * Repeatedly pulse from low to high and back again until times runs out.
-// //  */
-// var direction = 1;
-// var data = 0;
-// // var pulse = setInterval(function() {
-// //         rpio.pwmSetData(pin, data);
-// //         if (data === 0) {
-// //                 direction = 1;
-// //                 if (times-- === 0) {
-// //                         clearInterval(pulse);
-// //                         rpio.open(pin, rpio.INPUT);
-// //                         return;
-// //                 }
-// //         } else if (data === max) {
-// //                 direction = -1;
-// //         }
-// //         data += direction;
-// // }, interval, data, direction, times);
-// setInterval(function() {
-//         rpio.pwmSetData(pin, 15)
-// }, interval, data, direction, times)
-
-// rpio.close(pin)
