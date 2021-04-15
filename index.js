@@ -40,6 +40,8 @@ raspi.init(() => {
 });
 
 class SG90 {
+    static MIN_RATE = 0.025
+    static MAX_RATE = 0.12
     static MIN_DEGREE = 0
     static MAX_DEGREE = 180
 
@@ -54,10 +56,10 @@ class SG90 {
 
     setDegree(degree) {
         if (degree > SG90.MAX_DEGREE) {
-            console.warn(`${degree}度は最大角度の180度を超過しています`)
+            console.warn(`${degree}度は最大角度の${SG90.MAX_DEGREE}度を超過しています`)
             degree = SG90.MAX_DEGREE
         } else if (degree < SG90.MIN_DEGREE) {
-            console.warn(`${degree}度は最小角度の0度を超過しています`)
+            console.warn(`${degree}度は最小角度の${SG90.MIN_DEGREE}度を超過しています`)
             degree = SG90.MIN_DEGREE
         }
 
