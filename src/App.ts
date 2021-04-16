@@ -1,5 +1,5 @@
 export class App {
-    static start() {
-        console.info('hoge')
-    }
+  static start() {
+    console.info('hoge')
+  }
 }

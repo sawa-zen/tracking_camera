@@ -4,20 +4,41 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .ts,.tsx ."
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "pi-camera": "^1.5.0",
-    "pi-servo": "^1.0.2",
     "raspi": "^6.0.1",
-    "raspi-pwm": "^6.0.0",
-    "rpio": "^2.4.2",
-    "typescript": "^4.2.4"
+    "raspi-pwm": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.39",
-    "ts-node": "^9.1.1"
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-unused-imports": "^1.1.0",
+    "husky": "^4.0.10",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "lint-staged": {
+    "*.{ts}": [
+      "npm run lint -- --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
