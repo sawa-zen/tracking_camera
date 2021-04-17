@@ -1,4 +1,4 @@
-import { ServoMotor } from '~/classes/ServoMotor'
+import { ServoMotor } from '../ServoMotor'
 
 export class SG90 extends ServoMotor {
   static readonly FREQUENCY: number = 50 // 50Hz

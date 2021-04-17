@@ -1,29 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "lib": [
-      "esnext"
-    ],
-    "baseUrl": "./",
-    "paths": {
-      "~/*": ["./src/*"]
-    },
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "experimentalDecorators": true
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "**/*.ts",
-  ]
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "js_out",
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "baseUrl": ".",
+  }
 }

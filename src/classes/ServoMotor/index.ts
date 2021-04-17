@@ -14,7 +14,6 @@ export class ServoMotor {
   ) {
     this.degree = defaultDegree
     this.pwm = new PWM({ pin, frequency })
-    this.write()
   }
 
   private _validateDegree(degree: number): boolean {
@@ -45,6 +44,5 @@ export class ServoMotor {
 
   reset() {
     this.degree = this.defaultDegree
-    this.write()
   }
 }
